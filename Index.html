@@ -3,10 +3,156 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mi Página Web</title>
+    <title>Sistema de Atención - Restaurante Sabores</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Bienvenido a mi página web extra</h1>
-    <p>Este es un ejemplo básico de un archivo.</p>
+    <div class="container">
+      <header class="header">
+        <h1>🍽️ Restaurante Sabores</h1>
+        <p>Sistema de Gestión de Pedidos</p>
+      </header>
+
+      <div class="main-content">
+        <!-- Sección de Mesas -->
+        <section class="tables-section">
+          <h2>Mesas Disponibles</h2>
+          <div class="tables-grid">
+            <div class="table-card" data-table="1">
+              <h3>Mesa 1</h3>
+              <p class="status available">Disponible</p>
+              <button class="btn take-table" onclick="takeTable(1)">
+                Tomar Mesa
+              </button>
+            </div>
+            <div class="table-card" data-table="2">
+              <h3>Mesa 2</h3>
+              <p class="status occupied">Ocupada</p>
+              <button class="btn add-order" onclick="openOrderModal(2)">
+                Añadir Pedido
+              </button>
+            </div>
+            <div class="table-card" data-table="3">
+              <h3>Mesa 3</h3>
+              <p class="status available">Disponible</p>
+              <button class="btn take-table" onclick="takeTable(3)">
+                Tomar Mesa
+              </button>
+            </div>
+            <div class="table-card" data-table="4">
+              <h3>Mesa 4</h3>
+              <p class="status available">Disponible</p>
+              <button class="btn take-table" onclick="takeTable(4)">
+                Tomar Mesa
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sección de Pedidos Activos -->
+        <section class="orders-section">
+          <h2>Pedidos Activos</h2>
+          <div class="orders-list">
+            <div class="order-card">
+              <div class="order-header">
+                <h3>Mesa 2</h3>
+                <span class="order-time">12:30 PM</span>
+              </div>
+              <ul class="order-items">
+                <li>Pasta Carbonara × 1</li>
+                <li>Ensalada César × 1</li>
+                <li>Agua Mineral × 2</li>
+              </ul>
+              <div class="order-total">Total: $45.00</div>
+              <button class="btn close-order" onclick="closeOrder(2)">
+                Cerrar Cuenta
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Modal para Añadir Pedido -->
+      <div id="orderModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeOrderModal()">&times;</span>
+          <h2>Nuevo Pedido - Mesa <span id="modalTableNumber"></span></h2>
+
+          <div class="menu-items">
+            <div class="menu-category">
+              <h3>Entradas</h3>
+              <div
+                class="menu-item"
+                onclick="addToOrder('Ensalada César', 12.00)"
+              >
+                <span>Ensalada César</span>
+                <span>$12.00</span>
+              </div>
+              <div class="menu-item" onclick="addToOrder('Sopa del Día', 8.00)">
+                <span>Sopa del Día</span>
+                <span>$8.00</span>
+              </div>
+            </div>
+
+            <div class="menu-category">
+              <h3>Platos Principales</h3>
+              <div
+                class="menu-item"
+                onclick="addToOrder('Pasta Carbonara', 18.00)"
+              >
+                <span>Pasta Carbonara</span>
+                <span>$18.00</span>
+              </div>
+              <div
+                class="menu-item"
+                onclick="addToOrder('Filete Mignon', 25.00)"
+              >
+                <span>Filete Mignon</span>
+                <span>$25.00</span>
+              </div>
+              <div
+                class="menu-item"
+                onclick="addToOrder('Pollo a la Parrilla', 16.00)"
+              >
+                <span>Pollo a la Parrilla</span>
+                <span>$16.00</span>
+              </div>
+            </div>
+
+            <div class="menu-category">
+              <h3>Bebidas</h3>
+              <div class="menu-item" onclick="addToOrder('Agua Mineral', 3.00)">
+                <span>Agua Mineral</span>
+                <span>$3.00</span>
+              </div>
+              <div class="menu-item" onclick="addToOrder('Refresco', 4.00)">
+                <span>Refresco</span>
+                <span>$4.00</span>
+              </div>
+              <div
+                class="menu-item"
+                onclick="addToOrder('Vino de la Casa', 8.00)"
+              >
+                <span>Vino de la Casa</span>
+                <span>$8.00</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="current-order">
+            <h3>Pedido Actual</h3>
+            <div id="currentOrderItems"></div>
+            <div class="order-summary">
+              <strong>Total: $<span id="orderTotal">0.00</span></strong>
+            </div>
+            <button class="btn confirm-order" onclick="confirmOrder()">
+              Confirmar Pedido
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
